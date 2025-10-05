@@ -1,3 +1,5 @@
+param([switch]$Delete)
+
 $CsvPath = ".\LogDirectories.csv"
 
 $rows = Import-Csv -Path $CsvPath
@@ -14,13 +16,22 @@ foreach ($row in $rows) {
     $files = Get-ChildItem -Path $path -Filter "$prefix*" -File |
              Where-Object { $_.LastWriteTime -lt $cutoff }
 
-    if ($files.Count -eq 0) {
+      if ($files.Count -eq 0) {
         Write-Host "  (No files found)"
+        continue
+    }
+
+    Write-Host "Found $($files.Count) file(s):"
+    $files | Select-Object FullName, LastWriteTime | Format-Table -AutoSize
+
+    if ($Delete) {
+        $files | ForEach-Object {
+            Remove-Item -LiteralPath $_.FullName -Force
+            Write-Host "Deleted: $($_.FullName)"
+        }
     } else {
-        Write-Host "Found $($files.Count) file(s):"
-        $files | Select-Object FullName, LastWriteTime | Format-Table -AutoSize
+        Write-Host "Preview only — add -Delete to actually remove them."
     }
 }
-
 Write-Host ""
 Write-Host "Finish scanning"
