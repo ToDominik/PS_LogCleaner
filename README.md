@@ -35,6 +35,7 @@ You can create example log files using:
 
 `New-Item -Path .\App1\app1-3.log -ItemType File`
 
+This PowerShell command sets the modification date of the file:
 
 `(Get-Item .\App1\app1-1.log).LastWriteTime = (Get-Date).AddDays(-40)`
 
