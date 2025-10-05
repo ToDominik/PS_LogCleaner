@@ -25,11 +25,11 @@ Use -Delete to actually remove files older than KeepForDays.
 
 You can create example log files using:
 
-New-Item -ItemType Directory -Force -Path .\App1
-New-Item -Path .\App1\app1-1.log -ItemType File
-New-Item -Path .\App1\app1-2.log -ItemType File
-New-Item -Path .\App1\app1-3.log -ItemType File
+`New-Item -ItemType Directory -Force -Path .\App1`
+`New-Item -Path .\App1\app1-1.log -ItemType File`
+`New-Item -Path .\App1\app1-2.log -ItemType File`
+`New-Item -Path .\App1\app1-3.log -ItemType File`
 
-(Get-Item .\App1\app1-1.log).LastWriteTime = (Get-Date).AddDays(-40)
-(Get-Item .\App1\app1-2.log).LastWriteTime = (Get-Date).AddDays(-20)
-(Get-Item .\App1\app1-3.log).LastWriteTime = (Get-Date).AddDays(-5)
+`(Get-Item .\App1\app1-1.log).LastWriteTime = (Get-Date).AddDays(-40)`
+`(Get-Item .\App1\app1-2.log).LastWriteTime = (Get-Date).AddDays(-20)`
+`(Get-Item .\App1\app1-3.log).LastWriteTime = (Get-Date).AddDays(-5)`
